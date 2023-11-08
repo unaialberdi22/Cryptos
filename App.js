@@ -12,15 +12,20 @@ import CoinItem from "./components/CoinItem";
 
 const App = () => {
   const [coins, setCoins] = useState([]);
+
   const [refreshing, setRefreshing] = useState(false);
   const [search, setSearch] = useState("");
 
   const loadData = async () => {
-    const res = await fetch(
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-    );
-    const data = await res.json();
-    setCoins(data);
+    try {
+      const response = await fetch(
+        "https://api.binance.com/api/v3/ticker/24hr"
+      );
+      const data = await response.json();
+      setCoins(data);
+    } catch (error) {
+      console.error("Error al cargar datos de la API de Binance:", error);
+    }
   };
 
   useEffect(() => {
@@ -43,10 +48,8 @@ const App = () => {
 
       <FlatList
         style={styles.list}
-        data={coins.filter(
-          (coin) =>
-            coin.name.toLowerCase().includes(search.toLocaleLowerCase()) ||
-            coin.symbol.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        data={coins.filter((coin) =>
+          coin.symbol.toLowerCase().includes("usdt") && coin.symbol.toLowerCase().includes(search.toLowerCase())
         )}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => <CoinItem coin={item} />}
