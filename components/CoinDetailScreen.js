@@ -41,7 +41,10 @@ const styles = StyleSheet.create({
   detailItem: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 8,
+    padding: 8,
+    borderWidth: 2,
+    borderColor: "white",
+    backgroundColor: "#262626",
   },
   detailLabel: {
     color: "#fff",
@@ -50,11 +53,14 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   button: {
-    backgroundColor: "#4657CE",
+    backgroundColor: "#141414",
     alignItems: "center",
     padding: 10,
     borderRadius: 5,
     marginTop: 20,
+    borderWidth: 1,
+    borderColor: "white",
+    marginBottom: 5,
   },
   buttonText: {
     color: "#fff",
